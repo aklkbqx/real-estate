@@ -1,7 +1,3 @@
-/**
- * Project-specific API configuration
- * This file configures the generic API library for this specific project
- */
 import API_UTILS from '../utils/api';
 
 /**
@@ -18,22 +14,12 @@ const THAI_ERROR_MESSAGES = {
     timeout: 'หมดเวลาการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง',
 };
 
-/**
- * Create configured API instance for this project
- */
 export const apiInstance = API_UTILS.getInstance('default', {
     // Get base URL from environment variables (Vite-specific)
     baseURLResolver: () => import.meta.env.VITE_API_URL || import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000',
 
     // Token configuration
     tokenKey: 'token',
-
-    // Paths that should not include authentication headers
-    excludeAuthPaths: [
-        '/v1/backend/login',
-        '/v1/auth/login',
-        '/v1/auth/register',
-    ],
 
     // Thai error messages for this project
     errorMessages: THAI_ERROR_MESSAGES,
@@ -48,18 +34,9 @@ export const apiInstance = API_UTILS.getInstance('default', {
     },
 
     // Request configuration
-    timeout: 15000, // 15 seconds
+    timeout: 15000,
     maxRetries: 3,
-    retryDelay: 1000, // 1 second
+    retryDelay: 1000,
 });
 
-/**
- * Export configured API instance as default
- * Usage in your components:
- * 
- * import api from '@/config/apiConfig';
- * 
- * const response = await api.get('/endpoint');
- * const data = await api.post('/endpoint', { data });
- */
 export default apiInstance;
